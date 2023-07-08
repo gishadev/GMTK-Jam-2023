@@ -1,10 +1,13 @@
-﻿using GMTK.Infrastructure;
+﻿using System;
+using GMTK.Infrastructure;
 using UnityEngine;
 
 namespace GMTK.Game.Core
 {
     public class GameManager : IGameManager
     {
+        public event Action OnWin; 
+
         public void Init()
         {
             Debug.Log("game manager inited");
@@ -25,6 +28,7 @@ namespace GMTK.Game.Core
 
         private void Win()
         {
+            OnWin?.Invoke();
             Debug.Log("Win!");
         }
     }
