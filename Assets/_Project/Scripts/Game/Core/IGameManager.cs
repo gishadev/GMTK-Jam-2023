@@ -2,6 +2,7 @@
 {
     public interface IGameManager
     {
+        bool IsPlaying { get; }
         void Init();
         void Tick();
         void Dispose();

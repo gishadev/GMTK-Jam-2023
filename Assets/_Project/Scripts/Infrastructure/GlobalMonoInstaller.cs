@@ -10,6 +10,7 @@ namespace GMTK.Infrastructure
             SignalBusInstaller.Install(Container);
 
             Container.Bind<IGameManager>().To<GameManager>().AsSingle().NonLazy();
+            Container.Bind<IManaTimer>().To<ManaTimer>().AsSingle().NonLazy();
         }
     }
 }

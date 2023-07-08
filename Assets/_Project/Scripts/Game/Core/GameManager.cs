@@ -1,16 +1,24 @@
 ﻿using System;
 using GMTK.Infrastructure;
 using UnityEngine;
+using Zenject;
 
 namespace GMTK.Game.Core
 {
     public class GameManager : IGameManager
     {
-        public event Action OnWin; 
+        [Inject] private IManaTimer _manaTimer;
 
+        public bool IsPlaying { get; private set; }
+        
+        public event Action OnWin;
+        
         public void Init()
         {
             Debug.Log("game manager inited");
+            IsPlaying = true;
+
+            _manaTimer.OutOfMana += Lose;
         }
 
         public void Tick()
@@ -19,16 +27,18 @@ namespace GMTK.Game.Core
 
         public void Dispose()
         {
+            _manaTimer.OutOfMana -= Lose;
         }
 
         private void Lose()
         {
+            IsPlaying = false;
             Debug.Log("Lose!");
         }
 
         private void Win()
         {
-            OnWin?.Invoke();
+            IsPlaying = false;
             Debug.Log("Win!");
         }
     }
