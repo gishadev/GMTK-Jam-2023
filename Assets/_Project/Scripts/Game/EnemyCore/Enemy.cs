@@ -1,3 +1,4 @@
+using GMTK.Game.EventsSO;
 using UnityEngine;
 
 namespace GMTK.Game.EnemyCore
@@ -5,19 +6,25 @@ namespace GMTK.Game.EnemyCore
     [RequireComponent(typeof(SeizeableObject))]
     public class Enemy : MonoBehaviour, ISeizeable
     {
+        [SerializeField] private EventSO onEnemyDeactivated;
         [SerializeField] private SeizeableObject _seizeableObject;
-
+        
         public bool IsSeized { get; private set; }
 
-        private void Awake()
+        private void OnEnable()
         {
             SeizeableObject.OnSeizeableObjectSelected += OnSeizeableObjectSelected;
             SeizeableObject.OnSeizeableObjectDeselected += OnSeizeableObjectDeselected;
-        }
 
+            onEnemyDeactivated.OnInvoked += SeizeOut;
+        }
+        
         private void OnDisable()
         {
             SeizeableObject.OnSeizeableObjectSelected -= OnSeizeableObjectSelected;
+            SeizeableObject.OnSeizeableObjectDeselected -= OnSeizeableObjectDeselected;
+            
+            onEnemyDeactivated.OnInvoked -= SeizeOut;
         }
 
         private void OnSeizeableObjectSelected(SeizeableObject seizeableObject)
@@ -44,6 +51,11 @@ namespace GMTK.Game.EnemyCore
         public void SeizeOut()
         {
             IsSeized = false;
+        }
+        
+        public void DeactivateEnemy()
+        {
+            onEnemyDeactivated.Invoke();
         }
     }
 }

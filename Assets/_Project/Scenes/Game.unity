@@ -428,17 +428,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &133236298 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5867290865763704830, guid: 0d57f316bcc6f24439a76cb0717ca071, type: 3}
-  m_PrefabInstance: {fileID: 276645802}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 125c9f8b65234bfc967ef3d5b9d2869f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &175200254
 GameObject:
   m_ObjectHideFlags: 3
@@ -760,8 +749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af24f73210c4b52b8f8fe6138f119a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seizeableObjects:
-  - {fileID: 133236298}
+  onEnemyDeactivated: {fileID: 11400000, guid: aa8cba63dc9a09a44a3b5a334986b809, type: 2}
   cameraFollowController: {fileID: 494476468}
   seizeCameraController: {fileID: 494476469}
 --- !u!1 &495711798

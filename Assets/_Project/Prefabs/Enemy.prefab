@@ -806,6 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d991036eb3b8e204e977bef8185b6292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEnemyDeactivated: {fileID: 11400000, guid: aa8cba63dc9a09a44a3b5a334986b809, type: 2}
   _seizeableObject: {fileID: 5867290865763704830}
 --- !u!114 &5867290865678035012
 MonoBehaviour:
