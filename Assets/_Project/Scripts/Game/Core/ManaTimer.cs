@@ -1,5 +1,7 @@
 ﻿using System;
+using GMTK.Game.EnemyCore;
 using GMTK.Infrastructure;
+using UnityEngine;
 using Zenject;
 
 namespace GMTK.Game.Core
@@ -8,24 +10,32 @@ namespace GMTK.Game.Core
     {
         [Inject] private GameDataSO _gameDataSO;
         [Inject] private IGameManager _gameManager;
+        [Inject] private ISeizeAbilityHandler _seizeAbilityHandler;
 
-        public float ManaPercentage { get; private set; }
         public event Action OutOfMana;
+
+        public float ManaPercentage
+        {
+            get => _manaPercentage;
+            private set => _manaPercentage = Mathf.Clamp01(value);
+        }
+
+        private float _manaPercentage;
 
         public void Init()
         {
             ManaPercentage = 1f;
-            SeizeableObject.OnSeizeableObjectSelected += OnSeizeIn;
+            _seizeAbilityHandler.SeizedIn += OnSeizedIn;
         }
 
-        private void OnSeizeIn(SeizeableObject seizeableObj)
+        private void OnSeizedIn(ISeizeable seizeable)
         {
             ManaPercentage -= _gameDataSO.ManaTimePenaltyPerSeizeInSeconds / _gameDataSO.FullManaTimeInSeconds;
         }
 
         public void Tick()
         {
-            if (!_gameManager.IsPlaying || ManaPercentage <= 0f)
+            if (!_gameManager.IsPlaying)
                 return;
 
             ManaPercentage -= _gameDataSO.ManaDecreasePerSecond;
@@ -38,7 +48,7 @@ namespace GMTK.Game.Core
 
         public void Dispose()
         {
-            SeizeableObject.OnSeizeableObjectSelected -= OnSeizeIn;
+            _seizeAbilityHandler.SeizedIn -= OnSeizedIn;
         }
     }
 }

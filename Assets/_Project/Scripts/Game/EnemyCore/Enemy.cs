@@ -1,58 +1,55 @@
+using GMTK.Game.Core;
 using GMTK.Game.EventsSO;
 using UnityEngine;
+using Zenject;
 
 namespace GMTK.Game.EnemyCore
 {
-    [RequireComponent(typeof(SeizeableObject))]
+    [RequireComponent(typeof(SeizeableObjectSelector))]
     public class Enemy : MonoBehaviour, ISeizeable
     {
         [SerializeField] private EventSO onEnemyDeactivated;
-        [SerializeField] private SeizeableObject _seizeableObject;
-        
+
+        [Inject] private ISeizeAbilityHandler _seizeAbilityHandler;
+
         public bool IsSeized { get; private set; }
 
         private void OnEnable()
         {
-            SeizeableObject.OnSeizeableObjectSelected += OnSeizeableObjectSelected;
-            SeizeableObject.OnSeizeableObjectDeselected += OnSeizeableObjectDeselected;
-
-            onEnemyDeactivated.OnInvoked += SeizeOut;
+            _seizeAbilityHandler.SeizedIn += OnSeizedIn;
+            _seizeAbilityHandler.SeizedOut += OnSeizedOut;
+            onEnemyDeactivated.OnInvoked += OnSeizeOut;
         }
-        
+
         private void OnDisable()
         {
-            SeizeableObject.OnSeizeableObjectSelected -= OnSeizeableObjectSelected;
-            SeizeableObject.OnSeizeableObjectDeselected -= OnSeizeableObjectDeselected;
-            
-            onEnemyDeactivated.OnInvoked -= SeizeOut;
+            _seizeAbilityHandler.SeizedIn -= OnSeizedIn;
+            _seizeAbilityHandler.SeizedOut -= OnSeizedOut;
+            onEnemyDeactivated.OnInvoked -= OnSeizeOut;
         }
 
-        private void OnSeizeableObjectSelected(SeizeableObject seizeableObject)
+        private void OnSeizedIn(ISeizeable seizeable)
         {
-            if(seizeableObject == _seizeableObject)
-                SeizeIn();
+            if ((Enemy) seizeable == this)
+                OnSeizeIn();
         }
 
-        private void OnSeizeableObjectDeselected(SeizeableObject seizeableObject)
+        private void OnSeizedOut(ISeizeable seizeable)
         {
-            if (seizeableObject == _seizeableObject)
-            {
-                SeizeOut();
-            }
+            if ((Enemy) seizeable == this)
+                OnSeizeOut();
         }
 
-        [ContextMenu("Seize In")]
-        public void SeizeIn()
+        public void OnSeizeIn()
         {
             IsSeized = true;
         }
 
-        [ContextMenu("Seize Out")]
-        public void SeizeOut()
+        public void OnSeizeOut()
         {
             IsSeized = false;
         }
-        
+
         public void DeactivateEnemy()
         {
             onEnemyDeactivated.Invoke();

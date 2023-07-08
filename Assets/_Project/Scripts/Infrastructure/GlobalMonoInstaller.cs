@@ -11,6 +11,7 @@ namespace GMTK.Infrastructure
 
             Container.Bind<IGameManager>().To<GameManager>().AsSingle().NonLazy();
             Container.Bind<IManaTimer>().To<ManaTimer>().AsSingle().NonLazy();
+            Container.Bind<ISeizeAbilityHandler>().To<SeizeAbilityHandler>().AsSingle().NonLazy();
         }
     }
 }

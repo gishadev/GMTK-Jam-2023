@@ -1,19 +1,23 @@
-﻿using GMTK.Game.EventsSO;
+﻿using GMTK.Game.Core;
+using GMTK.Game.EventsSO;
 using UnityEngine;
+using Zenject;
 
 namespace GMTK.Cameras
 {
     public class CameraManager : MonoBehaviour
     {
-        [SerializeField] private EventSO onEnemyDeactivated; 
-        
+        [SerializeField] private EventSO onEnemyDeactivated;
+
         [SerializeField] private CameraFollowController cameraFollowController;
         [SerializeField] private SeizeCameraController seizeCameraController;
 
+        [Inject] private ISeizeAbilityHandler _seizeAbilityHandler;
+
         private void OnEnable()
         {
-            SeizeableObject.OnSeizeableObjectSelected += cameraFollowController.SwapCameraTo;
-            SeizeableObject.OnSeizeableObjectSelected += seizeCameraController.DeactivateSeizeCamera;
+            _seizeAbilityHandler.SeizedIn += cameraFollowController.SwapCameraTo;
+            _seizeAbilityHandler.SeizedOut += seizeCameraController.DeactivateSeizeCamera;
 
             onEnemyDeactivated.OnInvoked += cameraFollowController.DeactivateCamera;
             onEnemyDeactivated.OnInvoked += seizeCameraController.ActivateSeizeCamera;
@@ -21,9 +25,9 @@ namespace GMTK.Cameras
 
         private void OnDisable()
         {
-            SeizeableObject.OnSeizeableObjectSelected -= cameraFollowController.SwapCameraTo;
-            SeizeableObject.OnSeizeableObjectSelected -= seizeCameraController.DeactivateSeizeCamera;
-            
+            _seizeAbilityHandler.SeizedIn -= cameraFollowController.SwapCameraTo;
+            _seizeAbilityHandler.SeizedOut -= seizeCameraController.DeactivateSeizeCamera;
+
             onEnemyDeactivated.OnInvoked -= cameraFollowController.DeactivateCamera;
             onEnemyDeactivated.OnInvoked -= seizeCameraController.ActivateSeizeCamera;
         }

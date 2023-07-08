@@ -8,7 +8,8 @@ namespace GMTK.Game.Core
     public class GameManager : IGameManager
     {
         [Inject] private IManaTimer _manaTimer;
-
+        [Inject] private ISeizeAbilityHandler _seizeAbilityHandler;
+        
         public bool IsPlaying { get; private set; }
         
         public event Action OnWin;
@@ -32,6 +33,7 @@ namespace GMTK.Game.Core
 
         private void Lose()
         {
+            _seizeAbilityHandler.SeizeOut();
             IsPlaying = false;
             Debug.Log("Lose!");
         }

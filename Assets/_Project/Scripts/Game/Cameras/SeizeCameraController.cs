@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using GMTK.Game.EnemyCore;
 using UnityEngine;
 
 namespace GMTK.Cameras
@@ -29,12 +30,12 @@ namespace GMTK.Cameras
             transform.position = position;
         }
 
-        public void DeactivateSeizeCamera(SeizeableObject seizableObject)
+        public void DeactivateSeizeCamera(ISeizeable seizeable)
         {
             virtualCamera.Priority = 0;
             virtualCamera.gameObject.SetActive(false);
 
-            transform.position = seizableObject.transform.position;
+            transform.position = seizeable.transform.position;
         }
 
         public void ActivateSeizeCamera()
