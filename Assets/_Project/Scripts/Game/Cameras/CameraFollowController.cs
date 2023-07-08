@@ -5,7 +5,7 @@ namespace GMTK.Cameras
 {
     public class CameraFollowController : MonoBehaviour
     {
-        [SerializeField] private CinemachineFreeLook playerCamera;
+        [SerializeField] private CinemachineVirtualCamera playerCamera;
         
         public void SwapCameraTo(Transform objectToTrack)
         {
