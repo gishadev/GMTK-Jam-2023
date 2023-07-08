@@ -29,12 +29,12 @@ namespace GMTK.Cameras
             transform.position = position;
         }
 
-        public void DeactivateSeizeCamera(Transform seizableObject)
+        public void DeactivateSeizeCamera(SeizeableObject seizableObject)
         {
             virtualCamera.Priority = 0;
             virtualCamera.gameObject.SetActive(false);
 
-            transform.position = seizableObject.position;
+            transform.position = seizableObject.transform.position;
         }
 
         public void ActivateSeizeCamera()

@@ -7,13 +7,15 @@ namespace GMTK.Cameras
     {
         [SerializeField] private CinemachineVirtualCamera playerCamera;
         
-        public void SwapCameraTo(Transform objectToTrack)
+        public void SwapCameraTo(SeizeableObject objectToTrack)
         {
             playerCamera.gameObject.SetActive(true);
             playerCamera.Priority = 10;
+
+            var objectToTrackTransform = objectToTrack.transform;
             
-            playerCamera.Follow = objectToTrack;
-            playerCamera.LookAt = objectToTrack;
+            playerCamera.Follow = objectToTrackTransform;
+            playerCamera.LookAt = objectToTrackTransform;
         }
 
         public void DeactivateCamera()

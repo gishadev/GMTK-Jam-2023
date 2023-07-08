@@ -5,25 +5,24 @@ namespace GMTK.Game.EnemyCore
     [RequireComponent(typeof(SeizeableObject))]
     public class Enemy : MonoBehaviour, ISeizeable
     {
-        public bool IsSeized { get; private set; }
+        [SerializeField] private SeizeableObject _seizeableObject;
 
-        private SeizeableObject _seizeableObject;
+        public bool IsSeized { get; private set; }
 
         private void Awake()
         {
-            _seizeableObject = GetComponent<SeizeableObject>();
-
-            _seizeableObject.OnSeizeableObjectSelected += OnSeizeableObjectSelected;
+            SeizeableObject.OnSeizeableObjectSelected += OnSeizeableObjectSelected;
         }
 
         private void OnDisable()
         {
-            _seizeableObject.OnSeizeableObjectSelected -= OnSeizeableObjectSelected;
+            SeizeableObject.OnSeizeableObjectSelected -= OnSeizeableObjectSelected;
         }
 
-        private void OnSeizeableObjectSelected(Transform trans)
+        private void OnSeizeableObjectSelected(SeizeableObject trans)
         {
-            SeizeIn();
+            if(trans == _seizeableObject)
+                SeizeIn();
         }
 
         [ContextMenu("Seize In")]

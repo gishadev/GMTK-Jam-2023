@@ -5,11 +5,11 @@ namespace GMTK
 {
     public class SeizeableObject : MonoBehaviour
     {
-        public event Action<Transform> OnSeizeableObjectSelected;
+        public static event Action<SeizeableObject> OnSeizeableObjectSelected;
 
         private void OnMouseDown()
         {
-            OnSeizeableObjectSelected?.Invoke(transform);
+            OnSeizeableObjectSelected?.Invoke(this);
         }
     }
 }
