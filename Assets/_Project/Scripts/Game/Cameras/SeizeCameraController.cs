@@ -6,12 +6,12 @@ namespace GMTK.Cameras
 {
     public class SeizeCameraController : MonoBehaviour
     {
-        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        [SerializeField] private CinemachineConfiner confiner;
         [SerializeField] private float cameraSpeed = 20f;
 
         private float _horizontalInput;
         private float _verticalInput;
-        
+
         private void Update()
         {
             Move();
@@ -24,24 +24,29 @@ namespace GMTK.Cameras
             _verticalInput = Input.GetAxisRaw("Vertical");
             _horizontalInput = Input.GetAxisRaw("Horizontal");
 
-            position.z += _verticalInput * cameraSpeed * Time.deltaTime;
             position.x += _horizontalInput * cameraSpeed * Time.deltaTime;
+            position.x = Mathf.Clamp(position.x, confiner.m_BoundingVolume.bounds.min.x,
+                confiner.m_BoundingVolume.bounds.max.x);
+
+            position.z += _verticalInput * cameraSpeed * Time.deltaTime;
+            position.z = Mathf.Clamp(position.z, confiner.m_BoundingVolume.bounds.min.z,
+                confiner.m_BoundingVolume.bounds.max.z);
 
             transform.position = position;
         }
 
         public void DeactivateSeizeCamera(ISeizeable seizeable)
         {
-            virtualCamera.Priority = 0;
-            virtualCamera.gameObject.SetActive(false);
+            confiner.VirtualCamera.Priority = 0;
+            confiner.VirtualCamera.gameObject.SetActive(false);
 
             transform.position = seizeable.transform.position;
         }
 
         public void ActivateSeizeCamera()
         {
-            virtualCamera.Priority = 10;
-            virtualCamera.gameObject.SetActive(true);
+            confiner.VirtualCamera.Priority = 10;
+            confiner.VirtualCamera.gameObject.SetActive(true);
         }
     }
 }

@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73009f116ade4551a2c62334dc1c3b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCamera: {fileID: 75506439}
+  confiner: {fileID: 75506440}
   cameraSpeed: 20
 --- !u!1 &234802605
 GameObject:
@@ -860,7 +860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73009f116ade4551a2c62334dc1c3b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCamera: {fileID: 75506439}
+  confiner: {fileID: 75506440}
   cameraSpeed: 20
 --- !u!114 &494476470
 MonoBehaviour:
@@ -1394,13 +1394,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105106262}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1487767335}
-  m_RootOrder: 3
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1105106264
 BoxCollider:
@@ -1413,8 +1413,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 26.02623, y: 17.4155, z: 24.689041}
-  m_Center: {x: 0.53781176, y: 8.207752, z: 3.5810814}
+  m_Size: {x: 22.915707, y: 18.357727, z: 6.315174}
+  m_Center: {x: 2.3379326, y: 8.207752, z: -3.9223099}
 --- !u!1 &1305746369
 GameObject:
   m_ObjectHideFlags: 3
@@ -1661,7 +1661,6 @@ Transform:
   - {fileID: 10441642}
   - {fileID: 75506438}
   - {fileID: 1958866298}
-  - {fileID: 1105106263}
   m_Father: {fileID: 494476467}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
