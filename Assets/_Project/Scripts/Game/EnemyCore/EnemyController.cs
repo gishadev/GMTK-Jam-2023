@@ -8,6 +8,7 @@ namespace GMTK.Game.EnemyCore
         [SerializeField] private float moveSpeed = 10f;
         [SerializeField] private float gravitySpeed = -10f;
 
+        private Vector2 _input, _rawInput;
         private Enemy _enemy;
         private CharacterController _characterController;
 
@@ -23,13 +24,29 @@ namespace GMTK.Game.EnemyCore
 
             if (!_enemy.IsSeized)
                 return;
-            var input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            HandleMovement(input);
+            GetInputs();
+            HandleMovement();
+            HandleRotation();
         }
 
-        private void HandleMovement(Vector2 input)
+        private void GetInputs()
         {
-            var moveDir = new Vector3(input.x, 0f, input.y);
+            _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            _rawInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        }
+
+        private void HandleRotation()
+        {
+            if (_rawInput.magnitude == 0)
+                return;
+
+            var lookDir = new Vector3(_input.x, 0f, _input.y);
+            transform.rotation = Quaternion.LookRotation(lookDir);
+        }
+
+        private void HandleMovement()
+        {
+            var moveDir = new Vector3(_input.x, 0f, _input.y);
             _characterController.Move(moveDir * (moveSpeed * Time.deltaTime));
         }
 
