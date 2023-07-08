@@ -1,9 +1,9 @@
 using Cinemachine;
 using UnityEngine;
 
-namespace GMTK
+namespace GMTK.Cameras
 {
-    public class CameraManager : MonoBehaviour
+    public class CameraFollowSwapper : MonoBehaviour
     {
         [SerializeField] private CinemachineFreeLook playerCamera;
         
