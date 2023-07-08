@@ -15,6 +15,12 @@ namespace GMTK.Game.Core
         public void Init()
         {
             ManaPercentage = 1f;
+            SeizeableObject.OnSeizeableObjectSelected += OnSeizeIn;
+        }
+
+        private void OnSeizeIn(SeizeableObject seizeableObj)
+        {
+            ManaPercentage -= _gameDataSO.ManaTimePenaltyPerSeizeInSeconds / _gameDataSO.FullManaTimeInSeconds;
         }
 
         public void Tick()
@@ -32,6 +38,7 @@ namespace GMTK.Game.Core
 
         public void Dispose()
         {
+            SeizeableObject.OnSeizeableObjectSelected -= OnSeizeIn;
         }
     }
 }
