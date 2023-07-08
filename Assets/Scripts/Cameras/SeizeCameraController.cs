@@ -14,11 +14,6 @@ namespace GMTK.Cameras
         private void Update()
         {
             Move();
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                
-            }
         }
 
         private void Move()
@@ -40,6 +35,12 @@ namespace GMTK.Cameras
             virtualCamera.gameObject.SetActive(false);
 
             transform.position = seizableObject.position;
+        }
+
+        public void ActivateSeizeCamera()
+        {
+            virtualCamera.Priority = 10;
+            virtualCamera.gameObject.SetActive(true);
         }
     }
 }

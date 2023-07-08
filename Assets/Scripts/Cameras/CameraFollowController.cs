@@ -15,5 +15,11 @@ namespace GMTK.Cameras
             playerCamera.Follow = objectToTrack;
             playerCamera.LookAt = objectToTrack;
         }
+
+        public void DeactivateCamera()
+        {
+            playerCamera.gameObject.SetActive(false);
+            playerCamera.Priority = 0;
+        }
     }
 }
