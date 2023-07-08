@@ -12,6 +12,7 @@ namespace GMTK.Game.EnemyCore
         private void Awake()
         {
             SeizeableObject.OnSeizeableObjectSelected += OnSeizeableObjectSelected;
+            SeizeableObject.OnSeizeableObjectDeselected += OnSeizeableObjectDeselected;
         }
 
         private void OnDisable()
@@ -19,10 +20,18 @@ namespace GMTK.Game.EnemyCore
             SeizeableObject.OnSeizeableObjectSelected -= OnSeizeableObjectSelected;
         }
 
-        private void OnSeizeableObjectSelected(SeizeableObject trans)
+        private void OnSeizeableObjectSelected(SeizeableObject seizeableObject)
         {
-            if(trans == _seizeableObject)
+            if(seizeableObject == _seizeableObject)
                 SeizeIn();
+        }
+
+        private void OnSeizeableObjectDeselected(SeizeableObject seizeableObject)
+        {
+            if (seizeableObject == _seizeableObject)
+            {
+                SeizeOut();
+            }
         }
 
         [ContextMenu("Seize In")]
