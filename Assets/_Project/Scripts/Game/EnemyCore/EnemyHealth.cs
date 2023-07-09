@@ -1,5 +1,6 @@
 ﻿using System;
 using GMTK.Game.TrapsCore;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace GMTK.Game.EnemyCore
@@ -9,6 +10,7 @@ namespace GMTK.Game.EnemyCore
         public static event Action<IDamageable> OnDie;
 
         [SerializeField] private DamageType mortaldamageType;
+        [SerializeField] private GameObject dieParticles;
         public DamageType MortaldamageType => mortaldamageType;
 
 
@@ -32,6 +34,12 @@ namespace GMTK.Game.EnemyCore
 
         private void Die()
         {
+            ParticleSystem particles = Instantiate(dieParticles, transform.position, quaternion.identity)
+                .GetComponent<ParticleSystem>();
+            
+            particles.Play();
+            Destroy(particles.gameObject, particles.main.duration);
+            
             OnDie?.Invoke(this);
         }
 

@@ -807,7 +807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d991036eb3b8e204e977bef8185b6292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnemyDeactivated: {fileID: 11400000, guid: aa8cba63dc9a09a44a3b5a334986b809, type: 2}
 --- !u!114 &5867290865678035012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,7 +821,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   gravitySpeed: -5
-  enemyHealth: {fileID: 5530805637030691055}
 --- !u!114 &5867290865763704830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,6 +876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mortaldamageType: -1
+  dieParticles: {fileID: 3462847497631217966, guid: 28b2631a8892bb44db0bf858e7701328, type: 3}
   maxHp: 5
 --- !u!1 &6419010616358025021
 GameObject:
