@@ -4,22 +4,16 @@ using UnityEngine;
 
 namespace GMTK.Game.TrapsCore
 {
-    public class TriggerTrapController : MonoBehaviour
+    public class TriggerTrapController : TrapController
     {
-        [SerializeField] private DamageType damageType;
-        
-        [SerializeField] private float cooldown;
-        
-        private bool _canUse = true;
-
         public void OnTriggerEnter(Collider other)
         {
-            if (_canUse)
+            if (canUse)
             {
                 if (other.TryGetComponent(out IDamageable damageable))
                 {
                     damageable.TakeDamage(damageType);
-                    _canUse = false;
+                    canUse = false;
                     StartCoroutine(Cooldown());
                 }
             }
@@ -28,7 +22,7 @@ namespace GMTK.Game.TrapsCore
         private IEnumerator Cooldown()
         {
             yield return new WaitForSeconds(cooldown);
-            _canUse = true;
+            canUse = true;
         }
     }
 }
