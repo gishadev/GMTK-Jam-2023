@@ -7,7 +7,6 @@ using Zenject;
 
 namespace GMTK.Game.Location
 {
-    
     public class LocationLoader : ILocationLoader
     {
         [Inject] private IGameManager _gameManager;
@@ -101,7 +100,6 @@ namespace GMTK.Game.Location
 
         public void MoveToNextLocation()
         {
-            
         }
 
         public void ResetIndex()
