@@ -9,7 +9,9 @@ namespace GMTK.Game.EnemyCore
         public event Action OnDie;
         
         [SerializeField] private DamageType mortaldamageType;
-        
+        public DamageType MortaldamageType => mortaldamageType;
+
+
         [SerializeField] private float maxHp;
         public float MaxHp => maxHp;
 

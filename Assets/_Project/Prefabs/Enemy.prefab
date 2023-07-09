@@ -877,6 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96680282ddc14918bb03753f9aedff89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mortaldamageType: -1
   maxHp: 5
 --- !u!1 &6419010616358025021
 GameObject:

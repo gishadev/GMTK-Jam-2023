@@ -15,7 +15,7 @@ namespace GMTK.Editor
 
             if (GUILayout.Button("Kill"))
             {
-                enemyHealth.TakeDamage(enemyHealth.MaxHp);
+                enemyHealth.TakeDamage(enemyHealth.MortaldamageType);
             }
         }
     }
