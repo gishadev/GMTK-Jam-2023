@@ -18,12 +18,14 @@ namespace GMTK.Game.Player
         public static event Action DoneMovingToFinish;
         public static event Action<IFollowable> StartedMovingToFinish;
 
+        public bool IsMovingToFinish => _isMovingToFinish;
+
         private void Update()
         {
-            if (!_isMovingToFinish)
+            if (!IsMovingToFinish)
                 return;
 
-            if (_isMovingToFinish && agent.remainingDistance < maxDistanceToFinishMoving)
+            if (IsMovingToFinish && agent.remainingDistance < maxDistanceToFinishMoving)
             {
                 DoneMovingToFinish?.Invoke();
                 _isMovingToFinish = false;

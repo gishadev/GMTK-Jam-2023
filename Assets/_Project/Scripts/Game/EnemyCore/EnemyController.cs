@@ -33,11 +33,6 @@ namespace GMTK.Game.EnemyCore
         {
             _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             _rawInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                _enemy.DeactivateEnemy();
-            }
         }
 
         private void HandleRotation()

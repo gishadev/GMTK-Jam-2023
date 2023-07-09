@@ -25,6 +25,7 @@ namespace GMTK.Infrastructure
         private void Update()
         {
             _manaTimer.Tick();
+            _seizeAbilityHandler.Tick();
         }
 
         [ContextMenu("Force Win")]

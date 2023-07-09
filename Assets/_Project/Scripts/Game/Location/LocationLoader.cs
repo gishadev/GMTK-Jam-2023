@@ -19,6 +19,7 @@ namespace GMTK.Game.Location
 
         public Location CurrentSceneLocation => _currentSceneLocation;
         public Player.Player Player { get; private set; }
+        public GameObject Camera { get; private set; }
 
         public void Init()
         {
@@ -52,17 +53,26 @@ namespace GMTK.Game.Location
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
+            // Load location.
             if (CurrentSceneLocation != null)
                 Object.Destroy(CurrentSceneLocation.gameObject);
             _currentSceneLocation = _diContainer.InstantiatePrefab(_currentLocationData.LocationPrefab.gameObject,
                 Vector3.zero,
                 Quaternion.identity, null).GetComponent<Location>();
 
+            // Load player.
             if (Player != null)
                 Object.Destroy(Player.gameObject);
             Player = _diContainer.InstantiatePrefab(_gameDataSO.PlayerPrefab,
                 _currentSceneLocation.EnterPoint.transform.position,
                 Quaternion.identity, null).GetComponent<Player.Player>();
+
+            // Load camera.
+            if (Camera != null)
+                Object.Destroy(Camera.gameObject);
+            Camera = _diContainer.InstantiatePrefab(_gameDataSO.CameraPrefab,
+                Vector3.zero,
+                Quaternion.identity, null);
 
             Debug.Log("location loaded: " + _currentLocationData);
         }

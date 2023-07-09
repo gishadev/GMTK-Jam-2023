@@ -1,10 +1,9 @@
 ﻿using Cinemachine;
-using GMTK.Game.EnemyCore;
 using UnityEngine;
 
 namespace GMTK.Cameras
 {
-    public class SeizeCameraController : MonoBehaviour
+    public class NavigationCameraController : MonoBehaviour
     {
         [SerializeField] private CinemachineConfiner confiner;
         [SerializeField] private float cameraSpeed = 20f;
@@ -35,15 +34,15 @@ namespace GMTK.Cameras
             transform.position = position;
         }
 
-        public void DeactivateSeizeCamera(ISeizeable seizeable)
+        public void Deactivate()
         {
             confiner.VirtualCamera.Priority = 0;
             confiner.VirtualCamera.gameObject.SetActive(false);
 
-            transform.position = seizeable.transform.position;
+            //transform.position = seizeable.transform.position;
         }
 
-        public void ActivateSeizeCamera()
+        public void Activate()
         {
             confiner.VirtualCamera.Priority = 10;
             confiner.VirtualCamera.gameObject.SetActive(true);

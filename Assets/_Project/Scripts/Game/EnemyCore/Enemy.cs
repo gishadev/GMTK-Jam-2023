@@ -10,8 +10,6 @@ namespace GMTK.Game.EnemyCore
     [RequireComponent(typeof(SeizeableObjectSelector))]
     public class Enemy : MonoBehaviour, ISeizeable, IFollowable
     {
-        [SerializeField] private EventSO onEnemyDeactivated;
-
         [Inject] private ISeizeAbilityHandler _seizeAbilityHandler;
         [Inject] private IGameManager _gameManager;
 
@@ -21,7 +19,6 @@ namespace GMTK.Game.EnemyCore
         {
             _seizeAbilityHandler.SeizedIn += OnSeizedIn;
             _seizeAbilityHandler.SeizedOut += OnSeizedOut;
-            onEnemyDeactivated.OnInvoked += SeizeOut;
             _gameManager.Lost += SeizeOut;
             _gameManager.Won += SeizeOut;
         }
@@ -30,7 +27,6 @@ namespace GMTK.Game.EnemyCore
         {
             _seizeAbilityHandler.SeizedIn -= OnSeizedIn;
             _seizeAbilityHandler.SeizedOut -= OnSeizedOut;
-            onEnemyDeactivated.OnInvoked -= SeizeOut;
             _gameManager.Lost -= SeizeOut;
             _gameManager.Won -= SeizeOut;
         }
@@ -41,10 +37,9 @@ namespace GMTK.Game.EnemyCore
                 SeizeIn();
         }
 
-        private void OnSeizedOut(ISeizeable seizeable)
+        private void OnSeizedOut()
         {
-            if ((Enemy) seizeable == this)
-                SeizeOut();
+            SeizeOut();
         }
 
         public void SeizeIn()
@@ -55,11 +50,6 @@ namespace GMTK.Game.EnemyCore
         public void SeizeOut()
         {
             IsSeized = false;
-        }
-
-        public void DeactivateEnemy()
-        {
-            onEnemyDeactivated.Invoke();
         }
     }
 }

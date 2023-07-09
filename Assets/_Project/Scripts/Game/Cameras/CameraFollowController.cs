@@ -1,5 +1,4 @@
 using Cinemachine;
-using GMTK.Game.EnemyCore;
 using UnityEngine;
 
 namespace GMTK.Cameras
@@ -19,7 +18,7 @@ namespace GMTK.Cameras
             playerCamera.LookAt = objectToTrackTransform;
         }
 
-        public void DeactivateCamera()
+        public void Deactivate()
         {
             playerCamera.gameObject.SetActive(false);
             playerCamera.Priority = 0;

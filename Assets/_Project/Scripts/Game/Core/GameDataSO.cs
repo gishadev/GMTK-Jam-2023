@@ -7,6 +7,7 @@ namespace GMTK.Game.Core
     public class GameDataSO : ScriptableObject
     {
         [SerializeField] private GameObject playerPrefab;
+        [SerializeField] private GameObject cameraPrefab;
 
         [SerializeField] private float fullManaTimeInSeconds = 30f;
         [SerializeField] private float manaTimePenaltyPerSeizeInSeconds = 1f;
@@ -21,5 +22,6 @@ namespace GMTK.Game.Core
         public LocationDataSO[] Locations => locations;
 
         public GameObject PlayerPrefab => playerPrefab;
+        public GameObject CameraPrefab => cameraPrefab;
     }
 }

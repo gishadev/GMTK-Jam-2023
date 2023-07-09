@@ -1,5 +1,4 @@
-﻿using GMTK.Cameras;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GMTK.Game.Player
 {
