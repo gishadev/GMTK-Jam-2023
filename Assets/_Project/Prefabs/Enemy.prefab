@@ -876,6 +876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mortaldamageType: -1
+  dieParticles: {fileID: 3462847497631217966, guid: 28b2631a8892bb44db0bf858e7701328, type: 3}
   maxHp: 5
 --- !u!1 &6419010616358025021
 GameObject:
