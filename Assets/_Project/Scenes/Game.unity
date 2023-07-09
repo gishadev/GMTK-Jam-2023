@@ -420,10 +420,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ManTrap
       objectReference: {fileID: 0}
-    - target: {fileID: 767801525767258790, guid: 11352c9797be21846a7d601fa072ef7d, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11352c9797be21846a7d601fa072ef7d, type: 3}
 --- !u!1 &129367987
@@ -1424,7 +1420,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1060095988
 PrefabInstance:
@@ -2177,7 +2173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5805754675625415228, guid: c1ad94643e623964a9bdea56ed6d40b9, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5805754675625415228, guid: c1ad94643e623964a9bdea56ed6d40b9, type: 3}
       propertyPath: m_LocalPosition.x
