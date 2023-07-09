@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 8
+  cooldown: 1000
 --- !u!1 &3334672111673660616
 GameObject:
   m_ObjectHideFlags: 0
