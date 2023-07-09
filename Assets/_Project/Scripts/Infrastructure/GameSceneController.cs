@@ -16,7 +16,9 @@ namespace GMTK.Infrastructure
         {
             _gameManager.Init();
             _manaTimer.Init();
+
             _locationLoader.Init();
+
             _seizeAbilityHandler.Init();
         }
 
@@ -25,11 +27,20 @@ namespace GMTK.Infrastructure
             _manaTimer.Tick();
         }
 
+        [ContextMenu("Force Win")]
+        public void ForceWin()
+        {
+            var gameManager = (GameManager) _gameManager;
+            gameManager.Win();
+        }
+
         private void OnDisable()
         {
             _gameManager.Dispose();
             _manaTimer.Dispose();
+
             _locationLoader.Dispose();
+
             _seizeAbilityHandler.Dispose();
         }
     }

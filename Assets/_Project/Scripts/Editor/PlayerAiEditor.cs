@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace GMTK.Editor
 {
-    [CustomEditor(typeof(PlayerAi))]
+    [CustomEditor(typeof(PlayerAI))]
     public class PlayerAiEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            PlayerAi playerAi = (PlayerAi) target;
+            PlayerAI playerAi = (PlayerAI) target;
             
             if (GUILayout.Button("Move to finish"))
             {

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d8a7755e7a4c30ae1442d3567474d6, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 4092417876039786495, guid: 7c0fb1a52f581c9448981dbc73e4a175, type: 3}
   fullManaTimeInSeconds: 30
   manaTimePenaltyPerSeizeInSeconds: 5
   locations:

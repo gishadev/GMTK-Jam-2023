@@ -1,4 +1,5 @@
 ﻿using GMTK.Game.Core;
+using GMTK.Game.Player;
 using GMTK.Infrastructure;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,12 +17,19 @@ namespace GMTK.Game.Location
         private Location _currentSceneLocation;
         private int _locationIndex;
 
+        public Location CurrentSceneLocation => _currentSceneLocation;
+        public Player.Player Player { get; private set; }
+
         public void Init()
         {
             _gameManager.Won += OnWon;
             _gameManager.Lost += OnLost;
             SceneManager.sceneLoaded += OnSceneLoaded;
+            PlayerAI.DoneMovingToFinish += OnDoneMovingToFinish;
 
+            // Debug Location, because it should be no pre loaded location on the scene.
+            var debugLocation = Object.FindObjectOfType<Location>();
+            _currentSceneLocation = debugLocation;
             _currentLocationData = _gameDataSO.Locations[_locationIndex];
         }
 
@@ -30,31 +38,42 @@ namespace GMTK.Game.Location
             _gameManager.Won -= OnWon;
             _gameManager.Lost -= OnLost;
             SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
-
-        private void OnLost()
-        {
-            LoadCurrentLocation();
-            MoveToNextLocation();
+            PlayerAI.DoneMovingToFinish -= OnDoneMovingToFinish;
         }
 
         private void OnWon()
         {
-            LoadCurrentLocation();
+        }
+
+        private void OnLost()
+        {
+            LoadScene();
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            if (_currentSceneLocation != null)
-                Object.Destroy(_currentSceneLocation.gameObject);
-
+            if (CurrentSceneLocation != null)
+                Object.Destroy(CurrentSceneLocation.gameObject);
             _currentSceneLocation = _diContainer.InstantiatePrefab(_currentLocationData.LocationPrefab.gameObject,
                 Vector3.zero,
                 Quaternion.identity, null).GetComponent<Location>();
+
+            if (Player != null)
+                Object.Destroy(Player.gameObject);
+            Player = _diContainer.InstantiatePrefab(_gameDataSO.PlayerPrefab,
+                _currentSceneLocation.EnterPoint.transform.position,
+                Quaternion.identity, null).GetComponent<Player.Player>();
+
             Debug.Log("location loaded: " + _currentLocationData);
         }
 
-        public void LoadCurrentLocation()
+        private void OnDoneMovingToFinish()
+        {
+            MoveToNextLocation();
+            LoadScene();
+        }
+
+        public void LoadScene()
         {
             SceneManager.LoadScene(Constants.SCENE_GAME_NAME);
         }

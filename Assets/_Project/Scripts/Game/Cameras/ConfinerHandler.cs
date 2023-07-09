@@ -1,6 +1,7 @@
 ﻿using Cinemachine;
 using GMTK.Game.Location;
 using UnityEngine;
+using Zenject;
 
 namespace GMTK.Cameras
 {
@@ -9,6 +10,8 @@ namespace GMTK.Cameras
     {
         private CinemachineConfiner _confiner;
 
+        [Inject] private ILocationLoader _locationLoader;
+
         private void Awake()
         {
             _confiner = GetComponent<CinemachineConfiner>();
@@ -16,7 +19,7 @@ namespace GMTK.Cameras
 
         private void Start()
         {
-            _confiner.m_BoundingVolume = FindObjectOfType<LocationBounds>().Collider;
+            _confiner.m_BoundingVolume = _locationLoader.CurrentSceneLocation.LocationBounds.Collider;
         }
     }
 }

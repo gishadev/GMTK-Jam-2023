@@ -36,7 +36,7 @@ namespace GMTK.Game.Core
             Lost?.Invoke();
         }
 
-        private void Win()
+        public void Win()
         {
             IsPlaying = false;
             Debug.Log("Win!");
