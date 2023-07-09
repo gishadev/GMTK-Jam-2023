@@ -1,5 +1,4 @@
 using Cinemachine;
-using GMTK.Game.EnemyCore;
 using UnityEngine;
 
 namespace GMTK.Cameras
@@ -8,18 +7,18 @@ namespace GMTK.Cameras
     {
         [SerializeField] private CinemachineVirtualCamera playerCamera;
         
-        public void SwapCameraTo(ISeizeable seizeable)
+        public void SwapCameraTo(IFollowable followable)
         {
             playerCamera.gameObject.SetActive(true);
             playerCamera.Priority = 10;
 
-            var objectToTrackTransform = seizeable.transform;
+            var objectToTrackTransform = followable.transform;
             
             playerCamera.Follow = objectToTrackTransform;
             playerCamera.LookAt = objectToTrackTransform;
         }
 
-        public void DeactivateCamera()
+        public void Deactivate()
         {
             playerCamera.gameObject.SetActive(false);
             playerCamera.Priority = 0;

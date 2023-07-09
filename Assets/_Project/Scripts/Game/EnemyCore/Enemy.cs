@@ -1,16 +1,17 @@
+using GMTK.Cameras;
 using GMTK.Game.Core;
 using GMTK.Game.EventsSO;
+using GMTK.Infrastructure;
 using UnityEngine;
 using Zenject;
 
 namespace GMTK.Game.EnemyCore
 {
     [RequireComponent(typeof(SeizeableObjectSelector))]
-    public class Enemy : MonoBehaviour, ISeizeable
+    public class Enemy : MonoBehaviour, ISeizeable, IFollowable
     {
-        [SerializeField] private EventSO onEnemyDeactivated;
-
         [Inject] private ISeizeAbilityHandler _seizeAbilityHandler;
+        [Inject] private IGameManager _gameManager;
 
         public bool IsSeized { get; private set; }
 
@@ -18,41 +19,37 @@ namespace GMTK.Game.EnemyCore
         {
             _seizeAbilityHandler.SeizedIn += OnSeizedIn;
             _seizeAbilityHandler.SeizedOut += OnSeizedOut;
-            onEnemyDeactivated.OnInvoked += OnSeizeOut;
+            _gameManager.Lost += SeizeOut;
+            _gameManager.Won += SeizeOut;
         }
 
         private void OnDisable()
         {
             _seizeAbilityHandler.SeizedIn -= OnSeizedIn;
             _seizeAbilityHandler.SeizedOut -= OnSeizedOut;
-            onEnemyDeactivated.OnInvoked -= OnSeizeOut;
+            _gameManager.Lost -= SeizeOut;
+            _gameManager.Won -= SeizeOut;
         }
 
         private void OnSeizedIn(ISeizeable seizeable)
         {
             if ((Enemy) seizeable == this)
-                OnSeizeIn();
+                SeizeIn();
         }
 
-        private void OnSeizedOut(ISeizeable seizeable)
+        private void OnSeizedOut()
         {
-            if ((Enemy) seizeable == this)
-                OnSeizeOut();
+            SeizeOut();
         }
 
-        public void OnSeizeIn()
+        public void SeizeIn()
         {
             IsSeized = true;
         }
 
-        public void OnSeizeOut()
+        public void SeizeOut()
         {
             IsSeized = false;
-        }
-
-        public void DeactivateEnemy()
-        {
-            onEnemyDeactivated.Invoke();
         }
     }
 }

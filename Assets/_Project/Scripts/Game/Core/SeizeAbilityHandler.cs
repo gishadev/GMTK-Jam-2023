@@ -1,21 +1,28 @@
 ﻿using System;
 using GMTK.Game.EnemyCore;
 using GMTK.Infrastructure;
+using UnityEngine;
 using Zenject;
 
 namespace GMTK.Game.Core
 {
     public class SeizeAbilityHandler : ISeizeAbilityHandler
     {
+        [Inject] private IGameManager _gameManager;
         public event Action<ISeizeable> SeizedIn;
-        public event Action<ISeizeable> SeizedOut;
+        public event Action SeizedOut;
         public ISeizeable CurrentSeizeable { get; private set; }
 
-        [Inject] private IGameManager _gameManager;
 
         public void Init()
         {
             SeizeableObjectSelector.SeizeableObjectSelected += OnSeizeableObjectSelected;
+        }
+
+        public void Tick()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                SeizeOut();
         }
 
         public void Dispose()
@@ -27,8 +34,8 @@ namespace GMTK.Game.Core
         {
             if (CurrentSeizeable != null)
             {
-                SeizedOut?.Invoke(CurrentSeizeable);
                 CurrentSeizeable = null;
+                SeizedOut?.Invoke();
             }
         }
 
@@ -40,8 +47,7 @@ namespace GMTK.Game.Core
             if (CurrentSeizeable == seizeable)
                 return;
 
-            if (CurrentSeizeable != null)
-                SeizedOut?.Invoke(CurrentSeizeable);
+            SeizeOut();
 
             CurrentSeizeable = seizeable;
             SeizedIn?.Invoke(CurrentSeizeable);
