@@ -6,6 +6,8 @@ namespace GMTK.Game.TrapsCore
 {
     public class TriggerTrapController : TrapController
     {
+        [SerializeField] private bool destroyOnActivate;
+
         public void OnTriggerEnter(Collider other)
         {
             if (canUse)
@@ -15,6 +17,9 @@ namespace GMTK.Game.TrapsCore
                     damageable.TakeDamage(damageType);
                     canUse = false;
                     StartCoroutine(Cooldown());
+
+                    if (destroyOnActivate)
+                        Destroy(gameObject);
                 }
             }
         }

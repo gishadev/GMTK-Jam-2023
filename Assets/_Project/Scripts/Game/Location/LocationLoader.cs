@@ -85,7 +85,10 @@ namespace GMTK.Game.Location
 
         public void LoadScene()
         {
-            SceneManager.LoadScene(Constants.SCENE_GAME_NAME);
+            if (_locationIndex == _gameDataSO.Locations.Length - 1)
+                SceneManager.LoadScene("WinScene");
+            else
+                SceneManager.LoadScene(Constants.SCENE_GAME_NAME);
         }
 
         public void MoveToNextLocation()
@@ -97,6 +100,11 @@ namespace GMTK.Game.Location
                 return;
             }
 
+            _locationIndex = 0;
+        }
+
+        public void ResetIndex()
+        {
             _locationIndex = 0;
         }
     }

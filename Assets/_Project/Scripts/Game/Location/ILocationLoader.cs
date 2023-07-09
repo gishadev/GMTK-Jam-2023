@@ -9,5 +9,6 @@
 
         void LoadScene();
         void MoveToNextLocation();
+        void ResetIndex();
     }
 }

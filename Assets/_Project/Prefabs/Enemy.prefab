@@ -807,7 +807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d991036eb3b8e204e977bef8185b6292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnemyDeactivated: {fileID: 11400000, guid: aa8cba63dc9a09a44a3b5a334986b809, type: 2}
 --- !u!114 &5867290865678035012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,7 +821,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   gravitySpeed: -5
-  enemyHealth: {fileID: 5530805637030691055}
 --- !u!114 &5867290865763704830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1370,6 +1368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4310701776737213875}
   - component: {fileID: 5447497154374159033}
+  - component: {fileID: 368758320503497863}
   m_Layer: 0
   m_Name: Grenadier
   m_TagString: Untagged
@@ -1478,6 +1477,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.14647496, y: -0.18287587, z: 0.30193505}
     m_Extent: {x: 0.7806356, y: 1.4510422, z: 0.6354587}
   m_DirtyAABB: 0
+--- !u!114 &368758320503497863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158526351800963248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &9168856157235560749
 GameObject:
   m_ObjectHideFlags: 0

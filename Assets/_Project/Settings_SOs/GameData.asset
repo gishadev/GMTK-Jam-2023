@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 4092417876039786495, guid: 7c0fb1a52f581c9448981dbc73e4a175, type: 3}
   cameraPrefab: {fileID: 6230246383819676202, guid: 58e7218b676b7cb44b78bbbce0666843, type: 3}
-  fullManaTimeInSeconds: 10
-  manaTimePenaltyPerSeizeInSeconds: 5
+  fullManaTimeInSeconds: 40
+  manaTimePenaltyPerSeizeInSeconds: 2
   locations:
   - {fileID: 11400000, guid: f53c1c636d582654093b89582d83480a, type: 2}
-  - {fileID: 11400000, guid: da62966168c5558449a92b5775b7227c, type: 2}
+  - {fileID: 11400000, guid: 8b38423da860ea746b626e7b7812f8f8, type: 2}
