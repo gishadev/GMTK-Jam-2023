@@ -7,7 +7,7 @@ namespace GMTK.Infrastructure
     {
         private void Awake()
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("MainMenuScene");
         }
     }
 }

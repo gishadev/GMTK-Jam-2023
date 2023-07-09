@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace GMTK
 {
-    [RequireComponent(typeof(ISeizeable))]
     public class SeizeableObjectSelector : MonoBehaviour
     {
         public static event Action<ISeizeable> SeizeableObjectSelected;
