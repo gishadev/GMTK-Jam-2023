@@ -1,7 +1,10 @@
-﻿namespace GMTK.Game.EnemyCore
+﻿using GMTK.Game.TrapsCore;
+
+namespace GMTK.Game.EnemyCore
 {
     public interface IDamageable
     {
-        void TakeDamage(float damage);
+        float MaxHp { get; }
+        void TakeDamage(DamageType damage);
     }
 }

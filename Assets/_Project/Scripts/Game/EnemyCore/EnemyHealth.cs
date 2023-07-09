@@ -1,11 +1,14 @@
 ﻿using System;
+using GMTK.Game.TrapsCore;
 using UnityEngine;
 
 namespace GMTK.Game.EnemyCore
 {
     public class EnemyHealth : MonoBehaviour, IDamageable
     {
-        public event Action OnDie; 
+        public event Action OnDie;
+        
+        [SerializeField] private DamageType mortaldamageType;
         
         [SerializeField] private float maxHp;
         public float MaxHp => maxHp;
@@ -17,13 +20,9 @@ namespace GMTK.Game.EnemyCore
             _currentHp = maxHp;
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(DamageType damage)
         {
-            if (_currentHp > damage)
-            {
-                _currentHp -= damage;
-            }
-            else
+            if (IsMortalDamage(damage))
             {
                 Die();
             }
@@ -32,6 +31,11 @@ namespace GMTK.Game.EnemyCore
         private void Die()
         {
             OnDie?.Invoke();
+        }
+
+        private bool IsMortalDamage(DamageType damage)
+        {
+            return (mortaldamageType & damage) != 0;
         }
     }
 }
