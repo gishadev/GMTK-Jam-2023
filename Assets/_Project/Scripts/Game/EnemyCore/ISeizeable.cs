@@ -6,7 +6,7 @@ namespace GMTK.Game.EnemyCore
     {
         Transform transform { get; }
         bool IsSeized { get; }
-        void OnSeizeIn();
-        void OnSeizeOut();
+        void SeizeIn();
+        void SeizeOut();
     }
 }

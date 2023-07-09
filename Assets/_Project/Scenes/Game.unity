@@ -1360,10 +1360,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1777398153, guid: fda469083ef7d354dba809c5cd3a8ae8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 21.24
-      objectReference: {fileID: 0}
     - target: {fileID: 8513775273737998317, guid: fda469083ef7d354dba809c5cd3a8ae8, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1552,7 +1548,7 @@ GameObject:
   - component: {fileID: 1958866298}
   - component: {fileID: 1958866299}
   m_Layer: 0
-  m_Name: PlayerVirtualCamera
+  m_Name: NavigationVirtualCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

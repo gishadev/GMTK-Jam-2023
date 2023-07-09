@@ -1,5 +1,6 @@
 ﻿using GMTK.Game.Core;
 using GMTK.Game.EventsSO;
+using GMTK.Game.Player;
 using UnityEngine;
 using Zenject;
 
@@ -16,7 +17,8 @@ namespace GMTK.Cameras
 
         private void OnEnable()
         {
-            _seizeAbilityHandler.SeizedIn += cameraFollowController.SwapCameraTo;
+            _seizeAbilityHandler.SeizedIn += seizeable => cameraFollowController.SwapCameraTo((IFollowable) seizeable);
+            PlayerAI.StartedMovingToFinish += followable => cameraFollowController.SwapCameraTo(followable);
             _seizeAbilityHandler.SeizedOut += seizeCameraController.DeactivateSeizeCamera;
 
             onEnemyDeactivated.OnInvoked += cameraFollowController.DeactivateCamera;
@@ -25,7 +27,8 @@ namespace GMTK.Cameras
 
         private void OnDisable()
         {
-            _seizeAbilityHandler.SeizedIn -= cameraFollowController.SwapCameraTo;
+            _seizeAbilityHandler.SeizedIn -= seizeable => cameraFollowController.SwapCameraTo((IFollowable) seizeable);
+            PlayerAI.StartedMovingToFinish -= followable => cameraFollowController.SwapCameraTo(followable);
             _seizeAbilityHandler.SeizedOut -= seizeCameraController.DeactivateSeizeCamera;
 
             onEnemyDeactivated.OnInvoked -= cameraFollowController.DeactivateCamera;

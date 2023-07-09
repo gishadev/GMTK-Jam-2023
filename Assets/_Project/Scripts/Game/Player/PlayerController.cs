@@ -1,5 +1,4 @@
-﻿using GMTK.Game.Core;
-using GMTK.Infrastructure;
+﻿using GMTK.Infrastructure;
 using UnityEngine;
 using Zenject;
 
