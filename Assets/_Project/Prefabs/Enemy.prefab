@@ -771,6 +771,7 @@ GameObject:
   - component: {fileID: 5867290865763704830}
   - component: {fileID: 4416698813979754220}
   - component: {fileID: 5867290865678035013}
+  - component: {fileID: 5530805637030691055}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -807,7 +808,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onEnemyDeactivated: {fileID: 11400000, guid: aa8cba63dc9a09a44a3b5a334986b809, type: 2}
-  _seizeableObject: {fileID: 5867290865763704830}
 --- !u!114 &5867290865678035012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,6 +822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   gravitySpeed: -5
+  enemyHealth: {fileID: 5530805637030691055}
 --- !u!114 &5867290865763704830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,6 +865,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5530805637030691055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5867290865678035018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96680282ddc14918bb03753f9aedff89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 5
 --- !u!1 &6419010616358025021
 GameObject:
   m_ObjectHideFlags: 0
