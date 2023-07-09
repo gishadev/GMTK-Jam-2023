@@ -17,7 +17,7 @@ MonoBehaviour:
   fullManaTimeInSeconds: 40
   manaTimePenaltyPerSeizeInSeconds: 2
   locations:
-  - {fileID: 11400000, guid: 5c531fbae11bd4a4ab4b795d2e259dc4, type: 2}
-  - {fileID: 11400000, guid: f53c1c636d582654093b89582d83480a, type: 2}
   - {fileID: 11400000, guid: 8b38423da860ea746b626e7b7812f8f8, type: 2}
+  - {fileID: 11400000, guid: f53c1c636d582654093b89582d83480a, type: 2}
+  - {fileID: 11400000, guid: 5c531fbae11bd4a4ab4b795d2e259dc4, type: 2}
   - {fileID: 11400000, guid: 817db8a00aa250b4a854b7a07754622d, type: 2}
