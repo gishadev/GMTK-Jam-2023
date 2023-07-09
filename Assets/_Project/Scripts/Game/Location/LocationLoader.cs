@@ -7,6 +7,7 @@ using Zenject;
 
 namespace GMTK.Game.Location
 {
+    
     public class LocationLoader : ILocationLoader
     {
         [Inject] private IGameManager _gameManager;
@@ -79,13 +80,20 @@ namespace GMTK.Game.Location
 
         private void OnDoneMovingToFinish()
         {
-            MoveToNextLocation();
-            LoadScene();
+            _locationIndex++;
+            if (_locationIndex <= _gameDataSO.Locations.Length - 1)
+            {
+                _currentLocationData = _gameDataSO.Locations[_locationIndex];
+                LoadScene();
+                return;
+            }
+
+            SceneManager.LoadScene("WinScene");
         }
 
         public void LoadScene()
         {
-            if (_locationIndex == _gameDataSO.Locations.Length - 1)
+            if (_locationIndex == _gameDataSO.Locations.Length)
                 SceneManager.LoadScene("WinScene");
             else
                 SceneManager.LoadScene(Constants.SCENE_GAME_NAME);
@@ -93,14 +101,7 @@ namespace GMTK.Game.Location
 
         public void MoveToNextLocation()
         {
-            _locationIndex++;
-            if (_locationIndex <= _gameDataSO.Locations.Length - 1)
-            {
-                _currentLocationData = _gameDataSO.Locations[_locationIndex];
-                return;
-            }
-
-            _locationIndex = 0;
+            
         }
 
         public void ResetIndex()

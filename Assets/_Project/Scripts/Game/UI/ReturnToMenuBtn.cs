@@ -1,6 +1,5 @@
 ﻿using GMTK.Game.Location;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace GMTK.Game.UI
@@ -11,8 +10,7 @@ namespace GMTK.Game.UI
 
         public void OnClick_ReturnToMenu()
         {
-            SceneManager.LoadScene("MainMenuScene");
-            _locationLoader.ResetIndex();
+            Application.Quit();
         }
     }
 }
