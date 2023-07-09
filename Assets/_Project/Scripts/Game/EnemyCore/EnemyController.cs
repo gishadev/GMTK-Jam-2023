@@ -24,11 +24,13 @@ namespace GMTK.Game.EnemyCore
         private void OnEnable()
         {
             enemyHealth.OnDie += _enemy.DeactivateEnemy;
+            enemyHealth.OnDie += OnEnemyDie;
         }
 
         private void OnDisable()
         {
             enemyHealth.OnDie -= _enemy.DeactivateEnemy;
+            enemyHealth.OnDie -= OnEnemyDie;
         }
 
         private void Update()
@@ -72,6 +74,11 @@ namespace GMTK.Game.EnemyCore
         {
             var gravity = _characterController.isGrounded ? 0f : gravitySpeed;
             _characterController.Move(Vector3.up * (gravity * Time.deltaTime));
+        }
+
+        private void OnEnemyDie()
+        {
+            gameObject.SetActive(false);
         }
     }
 }
