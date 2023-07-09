@@ -9,6 +9,8 @@ namespace GMTK.Game.TrapsCore
     {
         [SerializeField] private ProjectileController projectilePrefab;
         [SerializeField] private Transform[] spawnSpots;
+
+        [SerializeField] private AudioSource[] shootSounds;
         
         [SerializeField] private int projectilesInPool;
         private Queue<ProjectileController> _projectilePool;
@@ -38,7 +40,15 @@ namespace GMTK.Game.TrapsCore
         private IEnumerator ShootArrowsRecursively()
         {
             yield return new WaitForSeconds(cooldown);
+            
+            foreach (var audioSource in shootSounds)
+            {
+                audioSource.Stop();
+            }
+            
             _projectilePool.Dequeue().gameObject.SetActive(true); 
+            shootSounds[Random.Range(0, shootSounds.Length)].Play();
+            
             StartCoroutine(ShootArrowsRecursively());
         }
 
