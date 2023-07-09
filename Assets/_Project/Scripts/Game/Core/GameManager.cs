@@ -9,11 +9,11 @@ namespace GMTK.Game.Core
     {
         [Inject] private IManaTimer _manaTimer;
         [Inject] private ISeizeAbilityHandler _seizeAbilityHandler;
-        
+
         public bool IsPlaying { get; private set; }
-        
-        public event Action OnWin;
-        
+
+        public event Action Won, Lost;
+
         public void Init()
         {
             Debug.Log("game manager inited");
@@ -21,11 +21,7 @@ namespace GMTK.Game.Core
 
             _manaTimer.OutOfMana += Lose;
         }
-
-        public void Tick()
-        {
-        }
-
+        
         public void Dispose()
         {
             _manaTimer.OutOfMana -= Lose;
@@ -36,12 +32,16 @@ namespace GMTK.Game.Core
             _seizeAbilityHandler.SeizeOut();
             IsPlaying = false;
             Debug.Log("Lose!");
+
+            Lost?.Invoke();
         }
 
         private void Win()
         {
             IsPlaying = false;
             Debug.Log("Win!");
+
+            Won?.Invoke();
         }
     }
 }

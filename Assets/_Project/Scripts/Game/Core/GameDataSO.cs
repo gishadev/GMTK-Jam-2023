@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GMTK.Game.Location;
+using UnityEngine;
 
 namespace GMTK.Game.Core
 {
@@ -8,8 +9,13 @@ namespace GMTK.Game.Core
         [SerializeField] private float fullManaTimeInSeconds = 30f;
         [SerializeField] private float manaTimePenaltyPerSeizeInSeconds = 1f;
 
+        [SerializeField] private LocationDataSO[] locations;
+
+
         public float ManaDecreasePerSecond => Time.deltaTime / FullManaTimeInSeconds;
         public float ManaTimePenaltyPerSeizeInSeconds => manaTimePenaltyPerSeizeInSeconds;
         public float FullManaTimeInSeconds => fullManaTimeInSeconds;
+
+        public LocationDataSO[] Locations => locations;
     }
 }

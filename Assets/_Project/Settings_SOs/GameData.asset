@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullManaTimeInSeconds: 30
   manaTimePenaltyPerSeizeInSeconds: 5
+  locations:
+  - {fileID: 11400000, guid: da62966168c5558449a92b5775b7227c, type: 2}
+  - {fileID: 11400000, guid: 9018e2e17f03902488c20e53b49cf8ae, type: 2}

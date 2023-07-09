@@ -12,13 +12,13 @@ namespace GMTK.Game.Player
         private void OnEnable()
         {
             if (_gameManager != null)
-                _gameManager.OnWin += playerAI.MoveToFinish;
+                _gameManager.Won += playerAI.MoveToFinish;
         }
 
         private void OnDisable()
         {
             if (_gameManager != null)
-                _gameManager.OnWin -= playerAI.MoveToFinish;
+                _gameManager.Won -= playerAI.MoveToFinish;
         }
     }
 }
