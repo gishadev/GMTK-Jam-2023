@@ -11,6 +11,7 @@ namespace GMTK.Game.TrapsCore
         [SerializeField] private Transform[] finalWallsPosition;
         
         [SerializeField] private TriggerTrapController damageTrigger;
+        [SerializeField] private AudioSource[] sounds;
 
         private List<Vector3> _startWallsPosition = new();
         
@@ -28,6 +29,11 @@ namespace GMTK.Game.TrapsCore
 
         private IEnumerator MoveWallsRecursively()
         {
+            foreach (var audioSource in sounds)
+            {
+                audioSource.Stop();
+            }
+            
             if (canUse)
             {
                 int i = 0;
@@ -40,6 +46,8 @@ namespace GMTK.Game.TrapsCore
                 yield return new WaitForSeconds(cooldown);
 
                 canUse = false;
+                
+                sounds[Random.Range(0, sounds.Length)].Play();
                 damageTrigger.gameObject.SetActive(true);
             }
             else
