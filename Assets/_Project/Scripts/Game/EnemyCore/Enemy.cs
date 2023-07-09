@@ -1,6 +1,6 @@
+using System;
 using GMTK.Cameras;
 using GMTK.Game.Core;
-using GMTK.Game.EventsSO;
 using GMTK.Infrastructure;
 using UnityEngine;
 using Zenject;
@@ -15,12 +15,29 @@ namespace GMTK.Game.EnemyCore
 
         public bool IsSeized { get; private set; }
 
+        private IDamageable _damageable;
+
+        private void Awake()
+        {
+            _damageable = GetComponentInChildren<IDamageable>();
+        }
+
         private void OnEnable()
         {
             _seizeAbilityHandler.SeizedIn += OnSeizedIn;
             _seizeAbilityHandler.SeizedOut += OnSeizedOut;
             _gameManager.Lost += SeizeOut;
             _gameManager.Won += SeizeOut;
+            EnemyHealth.OnDie += OnDie;
+        }
+
+        private void OnDie(IDamageable damageable)
+        {
+            if (damageable != _damageable)
+                return;
+
+            SeizeOut();
+            gameObject.SetActive(false);
         }
 
         private void OnDisable()
@@ -29,6 +46,7 @@ namespace GMTK.Game.EnemyCore
             _seizeAbilityHandler.SeizedOut -= OnSeizedOut;
             _gameManager.Lost -= SeizeOut;
             _gameManager.Won -= SeizeOut;
+            EnemyHealth.OnDie -= OnDie;
         }
 
         private void OnSeizedIn(ISeizeable seizeable)

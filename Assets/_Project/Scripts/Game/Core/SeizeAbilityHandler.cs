@@ -17,6 +17,12 @@ namespace GMTK.Game.Core
         public void Init()
         {
             SeizeableObjectSelector.SeizeableObjectSelected += OnSeizeableObjectSelected;
+            EnemyHealth.OnDie += OnDie;
+        }
+
+        private void OnDie(IDamageable obj)
+        {
+            SeizeOut();
         }
 
         public void Tick()
@@ -28,6 +34,7 @@ namespace GMTK.Game.Core
         public void Dispose()
         {
             SeizeableObjectSelector.SeizeableObjectSelected -= OnSeizeableObjectSelected;
+            EnemyHealth.OnDie -= OnDie;
         }
 
         public void SeizeOut()

@@ -6,8 +6,8 @@ namespace GMTK.Game.EnemyCore
 {
     public class EnemyHealth : MonoBehaviour, IDamageable
     {
-        public event Action OnDie;
-        
+        public static event Action<IDamageable> OnDie;
+
         [SerializeField] private DamageType mortaldamageType;
         public DamageType MortaldamageType => mortaldamageType;
 
@@ -16,7 +16,7 @@ namespace GMTK.Game.EnemyCore
         public float MaxHp => maxHp;
 
         private float _currentHp;
-        
+
         private void Awake()
         {
             _currentHp = maxHp;
@@ -32,7 +32,7 @@ namespace GMTK.Game.EnemyCore
 
         private void Die()
         {
-            OnDie?.Invoke();
+            OnDie?.Invoke(this);
         }
 
         private bool IsMortalDamage(DamageType damage)

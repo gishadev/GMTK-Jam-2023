@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GMTK.Game.EnemyCore
 {
@@ -9,8 +8,6 @@ namespace GMTK.Game.EnemyCore
         [SerializeField] private float moveSpeed = 10f;
         [SerializeField] private float gravitySpeed = -10f;
 
-        [SerializeField] private EnemyHealth enemyHealth;
-
         private Vector2 _input, _rawInput;
         private Enemy _enemy;
         private CharacterController _characterController;
@@ -19,18 +16,6 @@ namespace GMTK.Game.EnemyCore
         {
             _characterController = GetComponent<CharacterController>();
             _enemy = GetComponent<Enemy>();
-        }
-
-        private void OnEnable()
-        {
-            enemyHealth.OnDie += _enemy.DeactivateEnemy;
-            enemyHealth.OnDie += OnEnemyDie;
-        }
-
-        private void OnDisable()
-        {
-            enemyHealth.OnDie -= _enemy.DeactivateEnemy;
-            enemyHealth.OnDie -= OnEnemyDie;
         }
 
         private void Update()
@@ -69,11 +54,6 @@ namespace GMTK.Game.EnemyCore
         {
             var gravity = _characterController.isGrounded ? 0f : gravitySpeed;
             _characterController.Move(Vector3.up * (gravity * Time.deltaTime));
-        }
-
-        private void OnEnemyDie()
-        {
-            gameObject.SetActive(false);
         }
     }
 }
